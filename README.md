@@ -90,9 +90,37 @@ echo "$@"
 ![getopts1](https://user-images.githubusercontent.com/94296757/142471448-a27af50e-9ccf-4f5c-bedf-23dd28da9b31.GIF)
 
   
+  **5.getopts이용 예** 
+
+*loop문 이용해 처리*
+```
+#!/bin/bash
+
+while getopts "a:bc" opt; do
+  case $opt in
+    a)
+      echo >&2 "-a was triggered!, OPTARG: $OPTARG"
+      ;;
+    b)
+      echo >&2 "-b was triggered!"
+      ;;
+    c)
+      echo >&2 "-c was triggered!"
+      ;;
+  esac
+done
+
+shift $(( OPTIND - 1 ))
+echo "$@"
+```
+
+![getopts2](https://user-images.githubusercontent.com/94296757/142473208-eec44634-bb32-44a4-b547-821bdb5385ad.GIF)
+
+
+
+
   
-  
-**5. getopt 이용 예**
+**6. getopt 이용 예**
   
   ```   
   # short 옵션 지정은 -o 옵션으로 한다.
@@ -187,17 +215,12 @@ echo "$@"
 ![getopts_buil1](https://user-images.githubusercontent.com/94296757/142470907-64b3acc8-20d9-4230-9dbf-c3925316f167.GIF)
 
 
-**6.getopts이용 예** 
-
-*loop문 이용해 처리*
-
-
-
-
 
 
 ## Ⅱ리눅스 명령어 관련
 ### ⅰ)sed 명령어
+
+
 ### ⅱ)awk 명령어
 
 
