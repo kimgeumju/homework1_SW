@@ -120,7 +120,10 @@ echo "$options"
 
 1.'--' ( end of options ) 처리도 해준다.   
     
-  * getopt builtin
+ 
+ 
+ 
+ * getopt builtin
   
 ```
 #!/bin/bash
@@ -147,9 +150,32 @@ echo "$@"
 
 <출력 결과>
 
+![getopts_buil1](https://user-images.githubusercontent.com/94296757/142470907-64b3acc8-20d9-4230-9dbf-c3925316f167.GIF)
 
 
 **5.getopts이용 예** 
+
+```
+#!/bin/bash
+
+set -- -abc hello world
+
+echo $OPTIND
+
+getopts abc opt "$@"
+echo $opt, $OPTIND
+
+getopts abc opt #args부분을 생략하면  default값은 "$@"
+echo $opt, $OPTIND
+
+getopts abc opt
+echo $opt, $OPTIND
+
+shift $(( OPTIND - 1 ))
+echo "$@"
+```
+
+
 
 
 
