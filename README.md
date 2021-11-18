@@ -4,7 +4,7 @@
 
 # 명령어 
 ## Ⅰ쉘 스크립트 관련
-### ⅰ)getopt 명령어 & getopts 명령어
+### getopt 명령어 & getopts 명령어
 **1. 역사**
 
   원래 **getopt**에는 몇가지 문제가 있었다. 
@@ -56,11 +56,44 @@
 ***Emulation: 모방*
 
 **4.getopt이용 예**
+  
+  **getopt**은 **getopts builtin** 명령과 비슷한데 /usr/bin/getopt 에 위치한 외부 명령이다.
+  이 명령은 기본적으로 short, long 옵션을 모두 지원한다. 옵션 인수를 가질 경우 **:** 문자를 사용하는 것은 getopts builtin 명령과 동일하다.
+  
+  ```   
+  # short 옵션 지정은 -o 옵션으로 한다.
+  # ':'에 따라 옵션 -a는 옵션 인수는 갖는다.
+  getopt -o a:bc 
+  
+  
+ # long 옵션 지정은 -l 옵션으로 하고 옵션명은 ',' 로 구분한다.
+# ':' 에 따라서 옵션 --path 와 --name 은 옵션 인수를 갖는다.
+# 명령 라인에서 옵션 인수 사용은 "--name foo" 또는 "--name=foo" 두 가지 모두 가능하다.
+getopt -l help,path:,name: 
+
+# 명령 마지막에는 -- 와 함께 "$@" 를 붙인다.
+getopt -o a:bc -l help,path:,name: -- "$@"
+  ```
+  
+  *위를 토대로 bash 파일을 작성해봄 ↓*
+  
+  * getopt
+   
+   ***설정하지 않은 옵션이 사용되거나 옵션 인수가 빠질 경우 오류메시지를 출력해준다.***
+    ```
+#!/bin/bash
+
+options=$( getopt -o a:bc -l help,path:,name: -- "$@" )
+echo "$options"
+    ```
+    
+    
+  * getopt builtin
 
 **5.getopts이용 예** 
 
 
-### ⅱ)getopts 명령어
+
 
 ## Ⅱ리눅스 명령어 관련
 ### ⅰ)sed 명령어
