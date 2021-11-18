@@ -56,12 +56,43 @@
 ***Emulation: 모방*
 
 
-**4.getopt이용 예**
+**4. Option string 과 $OPTIND이용 예**
   
-  
+  ![getopts개념](https://user-images.githubusercontent.com/94296757/142472068-16a55660-a336-4511-b22c-cd15d555e2b0.png)
+
   
   **getopt**은 **getopts builtin** 명령과 비슷한데 /usr/bin/getopt 에 위치한 외부 명령이다.
-  이 명령은 기본적으로 short, long 옵션을 모두 지원한다. 옵션 인수를 가질 경우 **:** 문자를 사용하는 것은 getopts builtin 명령과 동일하다.
+  이 명령은 기본적으로 short, long 옵션을 모두 지원한다. 옵션 인수를 가질 경우 **":"** 문자를 사용하는 것은 getopts builtin 명령과 동일하다.
+  
+  
+  ```
+#!/bin/bash
+
+set -- -abc hello world
+
+echo $OPTIND
+
+getopts abc opt "$@"
+echo $opt, $OPTIND
+
+getopts abc opt #args부분을 생략하면  default값은 "$@"
+echo $opt, $OPTIND
+
+getopts abc opt
+echo $opt, $OPTIND
+
+shift $(( OPTIND - 1 ))
+echo "$@"
+```
+
+<출력 결과>
+
+![getopts1](https://user-images.githubusercontent.com/94296757/142471448-a27af50e-9ccf-4f5c-bedf-23dd28da9b31.GIF)
+
+  
+  
+  
+**5. getopt 이용 예**
   
   ```   
   # short 옵션 지정은 -o 옵션으로 한다.
@@ -156,31 +187,10 @@ echo "$@"
 ![getopts_buil1](https://user-images.githubusercontent.com/94296757/142470907-64b3acc8-20d9-4230-9dbf-c3925316f167.GIF)
 
 
-**5.getopts이용 예** 
+**6.getopts이용 예** 
 
-```
-#!/bin/bash
+*loop문 이용해 처리*
 
-set -- -abc hello world
-
-echo $OPTIND
-
-getopts abc opt "$@"
-echo $opt, $OPTIND
-
-getopts abc opt #args부분을 생략하면  default값은 "$@"
-echo $opt, $OPTIND
-
-getopts abc opt
-echo $opt, $OPTIND
-
-shift $(( OPTIND - 1 ))
-echo "$@"
-```
-
-<출력 결과>
-
-![getopts1](https://user-images.githubusercontent.com/94296757/142471448-a27af50e-9ccf-4f5c-bedf-23dd28da9b31.GIF)
 
 
 
