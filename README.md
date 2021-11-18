@@ -81,13 +81,29 @@ getopt -o a:bc -l help,path:,name: -- "$@"
    
    *설정하지 않은 옵션이 사용되거나 옵션 인수가 빠질 경우 오류메시지를 출력해준다.*
   
-    ```
+   ```   
+#!/bin/bash
+options=$( getopt -o a:bc -l help,path:,name: -- "$@" )
+echo "$options"
+   ```
+  
+  <출력결과> 
+    
+ ![getopt1](https://user-images.githubusercontent.com/94296757/142468122-922896d6-c55d-4161-b17a-a475f625acef.GIF)
+
+*getopt 명령의 특징은 사용자가 입력한 옵션들을 case 문에서 사용하기 좋게 정렬해준다.*
+
+```
 #!/bin/bash
 
 options=$( getopt -o a:bc -l help,path:,name: -- "$@" )
 echo "$options"
-    ```
-    
+```
+
+  <출력결과> 
+  
+  
+
     
   * getopt builtin
 
