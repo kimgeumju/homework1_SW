@@ -55,7 +55,10 @@
 
 ***Emulation: 모방*
 
+
 **4.getopt이용 예**
+  
+  
   
   **getopt**은 **getopts builtin** 명령과 비슷한데 /usr/bin/getopt 에 위치한 외부 명령이다.
   이 명령은 기본적으로 short, long 옵션을 모두 지원한다. 옵션 인수를 가질 경우 **:** 문자를 사용하는 것은 getopts builtin 명령과 동일하다.
@@ -175,6 +178,9 @@ shift $(( OPTIND - 1 ))
 echo "$@"
 ```
 
+<출력 결과>
+
+![getopts1](https://user-images.githubusercontent.com/94296757/142471448-a27af50e-9ccf-4f5c-bedf-23dd28da9b31.GIF)
 
 
 
