@@ -4,19 +4,19 @@
 
 # 명령어 
 ## Ⅰ쉘 스크립트 관련
-### ⅰ)getopt 명령어
+### ⅰ)getopt 명령어 & getopts 명령어
 1. 역사
   원래 **getopt**에는 몇가지 문제가 있었다. 
   인수의 공백이나 쉘 메타 문자를 처리 할 수 없었고, 오류 메세지 출력을 비활성화 하는 기능이 없었다.
   
-  *getopts*는 1986년 Unix SVR3와 함께 제공되는 Bourne shell에서 처음 도입되었다. 
+  **getopts**는 1986년 Unix SVR3와 함께 제공되는 Bourne shell에서 처음 도입되었다. 
   셸 자체 변수를 사용하여 현재 및 인수 위치, 
   POTIND 와 OPTARG의 위치를 추적하고 셸 변수에 옵션 이름을 반환하였다.
-  Bourne Shell 초기 버전에는 *getopts*가 없었다.
+  Bourne Shell 초기 버전에는 **getopts**가 없었다.
   
-  1995년, *getopts*는 Single UNIX Specification version 1 / X/Open Portability Guidelines Issue 4dp 포함되었다. 그 결과, *getopts*는 지금  Bourne shell, KornShell, Almquist shell, Bash 그리고 Zsh을 포함한 쉘에서 사용가능하다.
+  1995년, **getopts**는 Single UNIX Specification version 1 / X/Open Portability Guidelines Issue 4dp 포함되었다. 그 결과, **getopts**는 지금  Bourne shell, KornShell, Almquist shell, Bash 그리고 Zsh을 포함한 쉘에서 사용가능하다.
   
-  *getopts* 명령어는 IBM i 운영체제로 포트되었다.
+  **getopts** 명령어는 IBM i 운영체제로 포트되었다.
  
    **getopt**의 현대적인 사용법은 util-linux 의 향상된 구현으로 인해 부분적으로 활성화 되었다.
    BSD기반으로 한 **getopt** 버전은 **getopt** 대한 두 가지 불만 사항을 수정했을 뿐만 아니라 GNU 스타일의 긴 옵션과 옵션에 대한 선택적 인수를 구문 분석하는 기능을 도입했다. 그러나 다양한 BSD 배포판은 여전히 이전 구현을 고수했다.
@@ -24,24 +24,38 @@
   
 2.향상
 
-  * 다양한 getopts
-    2004년 봄 (Solaris 10 beta 개발), getopt()에 대한 libc 구현이 long 옵션을 지원하도록 향상되었다. 결과적으로, 새로운 기능은 Bourne Shell 의 기본 제공 명령에서도 사용할 수 있었다.  이것은 long aliases을 지정 하는 optstring의 괄호로 묶인 접미사에 의해 트리거된다.
+  * **다양한 getopts**
+  
+    2004년 봄 (Solaris 10 beta 개발), getopt()에 대한 libc 구현이 long 옵션을 지원하도록 향상되었다. 결과적으로, 새로운 기능은 Bourne Shell 의 기본 제공 명령에서도 사용할 수 있었다.  이것은 long aliases을 지정 하는 *optstring*의 괄호로 묶인 접미사에 의해 트리거된다.
     
 
 KornShell 과 Zsh는 모두 long 인수에 대한 확장을 가지고 있다. KornShell 은 Solaris에서와 같이 정의되고, Zsh는 별도의 zparseopts 명령을 통해 구현된다.
 KornShell 은 - 대신 + 으로 시작하는 옵션에 대해 optstring확장을 추가로 구현한다.
 
 
-  * Linux getopt
+  * **Linux getopt**
 
   **getopts**에 대한 대안은 **getop**의 향상된 Linux 버전(external command line program)이다. 
   
-  **getopt**의 Linux 고급 버전은 *getopts*의 추가 안전성과 고급 기능들이 있다. 예를 들어, --help 등의 long option name을 지원한다. 그리고 옵션이 모든 피연산자 앞에 나타날 필요가 없다. 예를 들어, command operand1 operand2 -a operand3 -b. 이것은 **getopt**의 Linux 확장 버전에서는 허용되지만 , *getopts*는 작동되지 않는다.
+  **getopt**의 Linux 고급 버전은 **getopts**의 추가 안전성과 고급 기능들이 있다. 예를 들어, *--help* 등의 long option name을 지원한다. 그리고 옵션이 모든 피연산자 앞에 나타날 필요가 없다. 예를 들어, *command operand1 operand2 -a operand3 -b*. 이것은 **getopt**의 Linux 확장 버전에서는 허용되지만 , **getopts**는 작동되지 않는다.
   또한, tcsh와 POSIX 같은 쉘과 선택적 인수를 위해 이스케이트 메타문자를 지원한다. 
 
 
-3. 
+3. 비교
+
+|Feature\Program|POSIX getopts|Solaris getopts|Unix/BSD getopt|Linux getopt|
+|--------|-------|--------|-------|-------|
+|쉬운 parsing을 위한 분할 옵션|예|예|예|예|
+|오류 메시지 억제 허용|예|예|아니요|예|
+|공백 및 메타 문자로 안전|예|예|아니요|예|
+|피연산자를 옵션과 혼합할 수 있습니다.|아니요|예|아니요|예|
+|긴 옵션 지원|Emulation|예|아니요|예|
+|선택적 인수|오류|오류|아니요|예|
+
+***Emulation: 모방*
+
 4. 
+5. 
 
 
 ### ⅱ)getopts 명령어
