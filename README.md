@@ -79,7 +79,7 @@ getopt -o a:bc -l help,path:,name: -- "$@"
   
   * getopt
    
-   *설정하지 않은 옵션이 사용되거나 옵션 인수가 빠질 경우 오류메시지를 출력해준다.*
+    **↓설정하지 않은 옵션이 사용되거나 옵션 인수가 빠질 경우 오류메시지를 출력해준다.↓**
   
    ```   
 #!/bin/bash
@@ -91,7 +91,7 @@ echo "$options"
     
  ![getopt1](https://user-images.githubusercontent.com/94296757/142468122-922896d6-c55d-4161-b17a-a475f625acef.GIF)
 
-*getopt 명령의 특징은 사용자가 입력한 옵션들을 case 문에서 사용하기 좋게 정렬해준다.*
+   **↓getopt 명령의 특징은 사용자가 입력한 옵션들을 case 문에서 사용하기 좋게 정렬해준다.↓**
 
 ```
 #!/bin/bash
@@ -102,10 +102,52 @@ echo "$options"
 
   <출력결과> 
   
-  
+  ![getopt2](https://user-images.githubusercontent.com/94296757/142469079-cbb4a306-a5a7-4a75-b5e1-92b47819a120.GIF)
 
+
+<출력 결과 설명>
+
+첫번째 명령 
+1. -a123 옵션이 -a '123' 로 분리.
+2. -bc 옵션이 -b -c 로 분리.
+3.  3. 옵션에 해당하지 않는 hello.c 는 '--' 뒤로 이동
+    
+두번째 명령    
+1. --path=/usr/bin 옵션이 --path '/usr/bin' 로 분리
+2.'--' 는 항상 끝부분에 붙는다.   
+    
+세번째 명령 
+
+1.'--' ( end of options ) 처리도 해준다.   
     
   * getopt builtin
+  
+```
+#!/bin/bash
+
+while getopts "a:bc" opt; do
+  case $opt in
+    a)
+      echo >&2 "-a was triggered!, OPTARG: $OPTARG"
+      ;;
+    b)
+      echo >&2 "-b was triggered!"
+      ;;
+    c)
+      echo >&2 "-c was triggered!"
+      ;;
+  esac
+done
+
+shift $(( OPTIND - 1 ))
+echo ------------------
+echo "$@"
+
+```
+
+<출력 결과>
+
+
 
 **5.getopts이용 예** 
 
