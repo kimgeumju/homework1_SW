@@ -331,7 +331,7 @@ sed -n -e 's/reakwoN/reak/gi' -e '2p' sed_test_file.txt
 그 전에 간단하게 기본 용어를 보자면, 아래는 하나의 텍스트 파일에 기록된 내용을 보여주고 있다. 여기서 각 단어들은 공백으로 구분되어진다. 각 줄(line)은 레코드(Record)라고 칭한다. 그리고 그 안에 각각의 단어들이 필드(Field)가 된다.
 
 
-<사진>
+![awk개념](https://user-images.githubusercontent.com/94296757/142656844-b160f8e5-b459-448c-904a-277dc192bbcb.png)
 
 AWK에서는 레코드가 $0, 그리고 $1, ..., $N 은 필드를 나타내는 열을 나타냅니다. 우리들이 사용할 파일은 위 내용은 아니고 아래의 내용을 담고 있습니다. 
 
@@ -356,6 +356,7 @@ awk '{ print $1 }' ./awk_test_file.txt
 awk '{ print $1,$2 }' ./awk_test_file.txt #여러줄 출력
 ```
 
+![awk열출력](https://user-images.githubusercontent.com/94296757/142656914-fe6afa09-8219-4391-a5cd-fc38e51bf0ed.GIF)
 
 
 2) 특정 pattern이 포함된 레코드 출력
@@ -364,7 +365,8 @@ awk '{ print $1,$2 }' ./awk_test_file.txt #여러줄 출력
  awk '/rea/' ./awk_test_file.txt
  ```
  
- 
+ ![awk특정패턴](https://user-images.githubusercontent.com/94296757/142656943-62450264-219a-4c89-9e81-2e1ec0239b78.GIF)
+
 
 
 
@@ -376,6 +378,7 @@ awk '{ print ("name : " $1, ", "  "phone : " $2) }' ./awk_test_file.txt
 
 >아래 출력에서 맨 윗줄은 무시하면 된다.
 
+![출력내용첨가](https://user-images.githubusercontent.com/94296757/142656962-32eef328-eeca-4a89-aac8-79c596922cba.GIF)
 
 
 
@@ -387,6 +390,7 @@ awk '{ print ("name : " $1, ", "  "phone : " $2) }' ./awk_test_file.txt
 awk '{ if ( $5 >= 80 ) print ($0) }' ./awk_test_file.txt
 ```
 
+![특정recordif](https://user-images.githubusercontent.com/94296757/142656986-71f48883-3cca-496f-9274-66bf63ed4484.GIF)
 
 
 
