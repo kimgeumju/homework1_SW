@@ -258,9 +258,54 @@ echo "$@"
 
 **3. sed 사용 예**
 
-* 1) 특정 행을 출력
-* 2) 특정 행 삭제 -d (delete)
-* 3) 단어 치환(Substitute) - s (substitute)
+ 1) 특정 행을 출력 - p (print)
+  > 전체 내용을 출력 : 기본적으로 전체의 줄을 출력하려면 command에 /$/p 또는 1,$p로 출력해볼 수 있다.
+
+  
+  ```
+  sed -n -e '1,$p' sed_test_file.txt
+sed -n -e '/$/p' sed_test_file.txt
+```
+
+  
+  > 첫번째 줄 출력
+
+  ```
+   sed -n -e '1p' ./sed_test_file.txt
+   ```
+  > 1-3 줄 출력 
+  start ~ end 줄까지 출력 : 그렇다면 첫째줄부터 4번째줄을 출력하기를 원한다면 쉼표로 구분된 출력하길 원하는 줄, 마지막 줄 p 의 형태를 사용하면 된다.
+  
+  ```
+  sed -n -e '1,4p' sed_test_file.txt
+  ```
+  
+  
+ 2) 특정 행 삭제 -d (delete)
+행삭제에 관한 명령어는 d를 사용하면 된다. d를 사용하는 것외에는 위의 줄 출력을 해주는 명령어 형태로 사용하면 된다. 
+
+> 2~6번째 줄을 삭제하고 나머지 모든 내용을 출력
+```
+sed -n -e '2,6d' -e '1,$p'  sed_test_file.txt
+```
+
+
+
+ 3) 단어 치환(Substitute) - s (substitute)
+  > 단어 s는 **substitute**(치환)의 약자, 그리고 /로 구분하여 old는 단어를 치환할 문자열, new는 새롭게 치환한 문자열인데 비어있으면 그 문자열을 삭제한 효과를 가질 수 있다. g는 global의 약자로 전체에 적용됨을 의미한다. 
+두번째의 i는 ignore case의 약자로 old의 단어를 검색할때 대소문자 구분하지 않겠다는 것을 의미한다. 
+아래 명령의 결과를 보고 차이점을 확인.
+
+```
+sed -n -e 's/reakwon/reak/g' -e '2p' sed_test_file.txt
+sed -n -e 's/reakwoN/reak/g' -e '2p' sed_test_file.txt
+sed -n -e 's/reakwoN/reak/gi' -e '2p' sed_test_file.txt
+```
+
+
+
+
+
 * 
 ### ⅱ)awk 명령어
 
