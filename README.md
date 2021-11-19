@@ -318,12 +318,90 @@ sed -n -e 's/reakwoN/reak/gi' -e '2p' sed_test_file.txt
 
 ### ⅱ)awk 명령어
 
+**1. 역사**
+ 
+ **AWK**는 1977년 Alfred Aho ( egrep의 저자 ), Peter J. Weinberger (작은 관계형 데이터베이스를 작업 했던) 및 *Brian Kernighan*에 의해 처음 개발되었고, 각각의 이니셜에서 이름을 따왔다. *Kernighan*에 따르면 **AWK**의 목표 중 하나는 숫자와 문자열을 모두 쉽게 조작할 수 있는 도구를 만드는 것이었다. **AWK**는 또한 입력 데이터에서 패턴을 검색하는 데 사용 되는 **Marc Rochkind**의 프로그래밍 언어에서 영감을 받았으며 yacc를 사용하여 구현되었다.
+ 
+
+**2.awk 개념**
+
+**AWK**(Aho Weinberger Kernighan)
+리눅스의 어떤 다른 명령어보다 명령어 이름이 매우 직관적이지 않은 명령어이다. 이 명령어를 개발한 사람들의 이름 약자(Aho  Weinberger Kernighan)이기 때문에 mkdir(make directory), rm(remove) 같은 의미를 축약하여 만든 명령어와는 명령어 이름이 다르다. 이 명령어를 읽을때는 주로 오크라고 읽는다. AWK는 유닉스에서 개발된 스크립트 언어로 텍스트가 저장되어 있는 파일을 원하는 대로 필터링하거나 추가해주거나 기타 가공을 통해서 나온 결과를 행과 열로 출력해주는 프로그램이다. 엄청나게 막강하고 다양한 기능을 담고 있다.
+
+그 전에 간단하게 기본 용어를 보자면, 아래는 하나의 텍스트 파일에 기록된 내용을 보여주고 있다. 여기서 각 단어들은 공백으로 구분되어진다. 각 줄(line)은 레코드(Record)라고 칭한다. 그리고 그 안에 각각의 단어들이 필드(Field)가 된다.
+
+
+<사진>
+
+AWK에서는 레코드가 $0, 그리고 $1, ..., $N 은 필드를 나타내는 열을 나타냅니다. 우리들이 사용할 파일은 위 내용은 아니고 아래의 내용을 담고 있습니다. 
+
+ 
+**file : awk_test_file.txt**
+```
+name    phone           birth           sex     score
+reakwon 010-1234-1234   1981-01-01      M       100
+sim     010-4321-4321   1999-09-09      F       88
+nara    010-1010-2020   1993-12-12      M       20
+yut     010-2323-2323   1988-10-10      F       59
+kim     010-1234-4321   1977-07-17      M       69
+nam     010-4321-7890   1996-06-20      M       75
+```
+
+1) 열만 출력하기
+각 $1, $2, $3 ... 은 열에 대응한다. 그리고 $0는 레코드에 대응한다. 여기서 이름만 모두 출력하겠다고 한다면 아래와 같이 awk 명령을 수행하면 된다.
+
+```
+awk '{ print $1 }' ./awk_test_file.txt
+
+awk '{ print $1,$2 }' ./awk_test_file.txt #여러줄 출력
+```
+
+
+
+2) 특정 pattern이 포함된 레코드 출력
+다음의 awk 명령은 rea라는 문자열이 포함된 레코드를 출력해주는 명령이다.
+```
+ awk '/rea/' ./awk_test_file.txt
+ ```
+ 
+ 
+
+
+
+3) 출력의 내용 첨가
+awk는 print에 문자열을 추가하여 출력물의 내용에 문자열을 추가할 수 있다. 만약 이름을 명시적으로 나타내기 위해 "name : " , 그리고 휴대폰 번호를 명시적으로 나타내려고 "phone : " 를 추가해서 출력하고 싶다면 아래의 awk 명령을 사용하면 된다.
+```
+awk '{ print ("name : " $1, ", "  "phone : " $2) }' ./awk_test_file.txt
+```
+
+>아래 출력에서 맨 윗줄은 무시하면 된다.
+
+
+
+
+4) 특정 Record를 검색하기 - if 구문
+**~이상 , ~ 이하의 레코드 출력**
+
+만약 위의 파일에서 점수가 80점 이상인 사람들의 레코드를 알고 싶다면 어떻게 하면 좋을까? 이거는 pattern을 써야할까요, action을 써야할까? action에서는 if 구문이 존재한다. 그래서 이렇게 사용하면 80점 이상인 record를 출력할 수 있다.
+```
+awk '{ if ( $5 >= 80 ) print ($0) }' ./awk_test_file.txt
+```
+
+
+
+
+**1. 소개**
+**1. 소개**
+
 
 ## Ⅲ참고 사이트
 
 [Getopts](https://en.wikipedia.org/wiki/Getopts "Getopts")
 [Getopts2](https://mug896.github.io/bash-shell/getopts.html)
 [sed](https://en.wikipedia.org/wiki/Sed)
+[awk]( https://en.wikipedia.org/wiki/AWK#History )
+
+
 # 2. 번호 없는 리스트 작성
 * 리스트1
   - 리스트2
