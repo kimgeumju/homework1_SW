@@ -266,6 +266,7 @@ echo "$@"
   sed -n -e '1,$p' sed_test_file.txt
 sed -n -e '/$/p' sed_test_file.txt
 ```
+![전체내용출력](https://user-images.githubusercontent.com/94296757/142651373-0b4eb7cb-bdea-4cd3-abc5-5461893bc541.GIF)
 
   
   > 첫번째 줄 출력
@@ -273,12 +274,18 @@ sed -n -e '/$/p' sed_test_file.txt
   ```
    sed -n -e '1p' ./sed_test_file.txt
    ```
+   
+   ![첫번째줄](https://user-images.githubusercontent.com/94296757/142651407-47313757-14b2-43e4-8299-598eea61a4a0.GIF)
+
+   
   > 1-3 줄 출력 
   start ~ end 줄까지 출력 : 그렇다면 첫째줄부터 4번째줄을 출력하기를 원한다면 쉼표로 구분된 출력하길 원하는 줄, 마지막 줄 p 의 형태를 사용하면 된다.
   
   ```
   sed -n -e '1,4p' sed_test_file.txt
   ```
+  ![1_3줄출력](https://user-images.githubusercontent.com/94296757/142651440-9d2ec9cb-ce10-4e17-b201-9c28aceef09d.GIF)
+
   
   
  2) 특정 행 삭제 -d (delete)
@@ -289,6 +296,7 @@ sed -n -e '/$/p' sed_test_file.txt
 sed -n -e '2,6d' -e '1,$p'  sed_test_file.txt
 ```
 
+![특정행삭제](https://user-images.githubusercontent.com/94296757/142651491-a5c3b6e8-677c-4c01-ace1-d2c7efb505f7.GIF)
 
 
  3) 단어 치환(Substitute) - s (substitute)
@@ -303,10 +311,11 @@ sed -n -e 's/reakwoN/reak/gi' -e '2p' sed_test_file.txt
 ```
 
 
+![단어치환](https://user-images.githubusercontent.com/94296757/142651529-3a972b13-9944-480a-91d1-e635a51051c7.GIF)
 
 
 
-* 
+
 ### ⅱ)awk 명령어
 
 
